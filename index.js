@@ -1,15 +1,17 @@
 const express = require('express')
+const cookieParser = require('cookie-parser');
 const app = express()
 const cors = require('cors')
-const User = require('./models/User');
+const User = require('./models/user');
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
 const withAuth = require('./middleware/withAuth.ts');
 
-require('dotenv').config()
+require('dotenv').config();
+
+const whitelist = ['http://localhost:5173'];
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin: whitelist, credentials: true},))
 app.use(cookieParser())
 
 app.get('/api/home', (req, res) => {
@@ -22,8 +24,8 @@ app.get('/api/secret', withAuth, function(req, res) {
 
 // Check if token is valid
 app.get('/checkToken', withAuth, function(req, res) {
-    res.sendStatus(200);
-  });
+  res.sendStatus(200);
+});
 
 // POST route to register a user
 app.post('/api/register', function(req, res) {
