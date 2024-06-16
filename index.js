@@ -2,7 +2,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser');
 const app = express()
 const cors = require('cors')
-const User = require('./models/user');
+const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const withAuth = require('./middleware/withAuth.ts');
 
@@ -13,6 +13,7 @@ const whitelist = ['http://localhost:5173'];
 app.use(express.json())
 app.use(cors({origin: whitelist, credentials: true},))
 app.use(cookieParser())
+app.use(express.static('dist'))
 
 app.get('/api/home', (req, res) => {
   res.send('Welcome!');
@@ -80,7 +81,7 @@ app.post('/api/authenticate', function(req, res) {
   });
 });
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
