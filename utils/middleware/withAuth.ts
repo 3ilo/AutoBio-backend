@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt, {
-  JwtPayload,
-  Secret,
-  VerifyCallback,
-  VerifyErrors
-} from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
-require('dotenv').config();
+const config = require('../config');
 const cookies = require('cookie-parser');
 
 export interface IToken {
@@ -24,7 +19,7 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
       res.status(401).send('Unauthorized: No token provided');
       next();
     } else {
-      const decoded = jwt.verify(token, process.env.AUTH_SECRET ?? '');
+      const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
       (req as CustomRequest).email = decoded;
       next();
     }
