@@ -1,6 +1,6 @@
 // eslint.config.js
-import stylisticTs from '@stylistic/eslint-plugin-ts'
-import js from "@eslint/js";
+import stylisticTs from '@stylistic/eslint-plugin-ts';
+import js from '@eslint/js';
 
 export default [
   js.configs.recommended,
@@ -9,7 +9,7 @@ export default [
       '@stylistic/ts': stylisticTs
     },
     rules: {
-      '@stylistic/ts/indent': ['error', 2],
+      '@stylistic/ts/indent': ['error', 2]
     }
   }
-]
+];
