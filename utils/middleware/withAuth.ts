@@ -17,7 +17,6 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     const token = req.cookies.token;
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
-      next();
     } else {
       const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
       (req as CustomRequest).email = decoded;
@@ -25,7 +24,6 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     }
   } catch {
     res.status(401).send('Unauthorized: Invalid token');
-    next();
   }
 };
 module.exports = withAuth;
