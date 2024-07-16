@@ -6,9 +6,15 @@ const withAuth = require('../utils/middleware/withAuth.ts');
 const config = require('../utils/config');
 const logger = require('../utils/logger');
 const authRouter = require('express').Router();
+const { addTokenToCache } = require('../utils/middleware/tokenBlacklist');
 
 // Check if token is valid
 authRouter.get('/checkToken', withAuth, function (req: Request, res: Response) {
+  res.sendStatus(200);
+});
+
+// Logout
+authRouter.get('/logout', [withAuth, addTokenToCache], function (req: Request, res: Response) {
   res.sendStatus(200);
 });
 

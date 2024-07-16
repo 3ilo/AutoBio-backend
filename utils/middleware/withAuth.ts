@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+const { checkCacheAndReject } = require('./tokenBlacklist');
 
 const config = require('../config');
 const cookies = require('cookie-parser');
@@ -18,6 +19,7 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
     } else {
+      checkCacheAndReject(token, res);
       const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
       (req as CustomRequest).email = decoded;
       next();
