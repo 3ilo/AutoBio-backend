@@ -19,10 +19,11 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
     } else {
-      checkCacheAndReject(token, res);
-      const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
-      (req as CustomRequest).email = decoded;
-      next();
+      if(!checkCacheAndReject(token, res)) {
+        const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
+        (req as CustomRequest).email = decoded;
+        next();
+      }
     }
   } catch {
     res.status(401).send('Unauthorized: Invalid token');

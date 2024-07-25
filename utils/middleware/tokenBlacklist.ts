@@ -10,8 +10,9 @@ const checkCacheAndReject = function (token: string, res: Response, next: NextFu
     if (ttlCache.get(token) != undefined) {
         logger.info(ttlCache.get(token))
         res.status(401).send('Unauthorized, please try again later.');
-        next()
+        return true
     }
+    return false
 }
 
 const addTokenToCache = function (req: Request, res: Response, next: NextFunction) {

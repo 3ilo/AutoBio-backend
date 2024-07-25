@@ -42,6 +42,7 @@ memoriesRouter.post('/add', withAuth, function (req: Request, res: Response) {
     }
 
     const { title, contents, date } = req.body;
+    
     const memory = new Memory({ title, contents, date, userId: email });
 
     memory
