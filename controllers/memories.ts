@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IMemorySchema } from '../models/Memory';
-import { CustomRequest } from '../utils/middleware/withAuth'
+import { AuthenticatedRequest } from '../utils/middleware/withAuth'
 const logger = require('../utils/logger');
 const Memory = require('../models/Memory');
 const withAuth = require('../utils/middleware/withAuth.ts');
@@ -9,7 +9,7 @@ const memoriesRouter = require('express').Router();
 // GET all user's memories
 memoriesRouter.get('/', withAuth, function (req: Request, res: Response) {
   logger.info(req.body);
-  const emailPayload = (req as CustomRequest).email;
+  const emailPayload = (req as AuthenticatedRequest).email;
   const email = typeof emailPayload !== 'string' ? emailPayload?.email : emailPayload
 
   if (!email) {
@@ -32,7 +32,7 @@ memoriesRouter.get('/', withAuth, function (req: Request, res: Response) {
 // POST a new memory for user
 memoriesRouter.post('/add', withAuth, function (req: Request, res: Response) {
     logger.info(req.body);
-    const emailPayload = (req as CustomRequest).email;
+    const emailPayload = (req as AuthenticatedRequest).email;
     const email = typeof emailPayload !== 'string' ? emailPayload?.email : emailPayload
 
     if (!email) {

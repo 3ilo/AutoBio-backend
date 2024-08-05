@@ -9,7 +9,7 @@ export interface IToken {
   email: string;
 }
 
-export interface CustomRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   email: string | JwtPayload;
 }
 
@@ -21,7 +21,8 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     } else {
       if(!checkCacheAndReject(token, res)) {
         const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
-        (req as CustomRequest).email = decoded;
+        (req as AuthenticatedRequest).email = decoded;
+        console.log((req as AuthenticatedRequest).email)
         next();
       }
     }
