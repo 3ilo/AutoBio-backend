@@ -19,10 +19,10 @@ const withAuth = function (req: Request, res: Response, next: NextFunction) {
     if (!token) {
       res.status(401).send('Unauthorized: No token provided');
     } else {
-      if(!checkCacheAndReject(token, res)) {
+      if (!checkCacheAndReject(token, res)) {
         const decoded = jwt.verify(token, config.AUTH_SECRET ?? '');
         (req as AuthenticatedRequest).email = decoded;
-        console.log((req as AuthenticatedRequest).email)
+        console.log((req as AuthenticatedRequest).email);
         next();
       }
     }

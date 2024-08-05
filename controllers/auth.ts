@@ -14,9 +14,13 @@ authRouter.get('/checkToken', withAuth, function (req: Request, res: Response) {
 });
 
 // Logout
-authRouter.get('/logout', [withAuth, addTokenToCache], function (req: Request, res: Response) {
-  res.sendStatus(200);
-});
+authRouter.get(
+  '/logout',
+  [withAuth, addTokenToCache],
+  function (req: Request, res: Response) {
+    res.sendStatus(200);
+  }
+);
 
 // POST route to register a user
 authRouter.post('/register', function (req: Request, res: Response) {

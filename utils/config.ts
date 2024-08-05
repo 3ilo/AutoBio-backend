@@ -1,13 +1,15 @@
-const path = require('path')
+const path = require('path');
 require('dotenv').config();
 
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 const AUTH_SECRET = process.env.AUTH_SECRET;
-const ILLUSTRATIONS_S3_ACCESS_KEY_ID = process.env.ILLUSTRATIONS_S3_ACCESS_KEY_ID;
-const ILLUSTRATIONS_S3_SECRET_ACCESS_KEY = process.env.ILLUSTRATIONS_S3_SECRET_ACCESS_KEY;
-const ILLUSTRATION_S3_BUCKET_NAME = process.env.ILLUSTRATION_S3_BUCKET_NAME
-const AWS_REGION = process.env.AWS_REGION
+const ILLUSTRATIONS_S3_ACCESS_KEY_ID =
+  process.env.ILLUSTRATIONS_S3_ACCESS_KEY_ID;
+const ILLUSTRATIONS_S3_SECRET_ACCESS_KEY =
+  process.env.ILLUSTRATIONS_S3_SECRET_ACCESS_KEY;
+const ILLUSTRATION_S3_BUCKET_NAME = process.env.ILLUSTRATION_S3_BUCKET_NAME;
+const AWS_REGION = process.env.AWS_REGION;
 
 module.exports = {
   MONGODB_URI,
