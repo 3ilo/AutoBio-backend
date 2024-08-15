@@ -45,9 +45,9 @@ memoriesRouter.post('/add', withAuth, function (req: Request, res: Response) {
     });
   }
 
-  const { title, contents, date } = req.body;
+  const { title, contents, date, images } = req.body;
 
-  const memory = new Memory({ title, contents, date, userId: email });
+  const memory = new Memory({ title, contents, date, userId: email, images: images });
 
   memory
     .save()
